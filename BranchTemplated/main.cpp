@@ -2,19 +2,22 @@
 using namespace std;
 
 const int ROWS = 10;
-const int COLS = 10; //
+const int COLS = 10;
 
-void FillRand(int arr[], const int n);
-void FillRand(double arr[], const int n);
-void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS);
+template<typename T>
+void FillRand(T arr[], const int n);
+template<typename T>
+void FillRand(T arr[ROWS][COLS], const int ROWS, const int COLS);
 
-void Print(int arr[], const int n);
-void Print(double arr[], const int n);
-void Print(int arr[ROWS][COLS], const int ROWS, const int COLS);
+template<typename T>
+void Print(T arr[], const int n);
+template<typename T>
+void Print(T arr[ROWS][COLS], const int ROWS, const int COLS);
 
-void Sort(int arr[], const int n);
-void Sort(double arr[], const int n);
-void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
+template<typename T>
+void Sort(T arr[], const int n);
+template<typename T>
+void Sort(T arr[ROWS][COLS], const int ROWS, const int COLS);
 
 //Git Branches
 
@@ -43,27 +46,19 @@ void main()
 	Sort(A, ROWS, COLS);
 	Print(A, ROWS, COLS);
 }
-
-void FillRand(int arr[], const int n)
+template<typename T>
+void FillRand(T arr[], const int n)
 {
 	//cout << typeid(arr).name() << endl;
 	for (int i = 0; i < n; i++)
 	{
 		arr[i] = rand() % 100;
+		arr[i] /= 10;
 	}
 }
 
-void FillRand(double arr[], const int n)
-{
-	//cout << typeid(arr).name() << endl;
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = double(rand() % 100) / 10;
-		//arr[i] /= 10;
-	}
-}
-
-void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T>
+void FillRand(T arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -73,8 +68,8 @@ void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS)
 		}
 	}
 }
-
-void Print(int arr[], const int n)
+template<typename T>
+void Print(T arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -82,16 +77,8 @@ void Print(int arr[], const int n)
 	}
 	cout << endl;
 }
-
-void Print(double arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << "\t";
-	}
-	cout << endl;
-}
-void Print(int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T>
+void Print(T arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -103,8 +90,8 @@ void Print(int arr[ROWS][COLS], const int ROWS, const int COLS)
 	}
 	cout << endl;
 }
-
-void Sort(int arr[], const int n)
+template<typename T>
+void Sort(T arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -112,7 +99,7 @@ void Sort(int arr[], const int n)
 		{
 			if (arr[j] < arr[i])
 			{
-				int buffer = arr[i];
+				T buffer = arr[i];
 				arr[i] = arr[j];
 				arr[j] = buffer;
 			}
@@ -120,23 +107,8 @@ void Sort(int arr[], const int n)
 	}
 }
 
-void Sort(double arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = i + 1; j < n; j++)
-		{
-			if (arr[j] < arr[i])
-			{
-				double buffer = arr[i];
-				arr[i] = arr[j];
-				arr[j] = buffer;
-			}
-		}
-	}
-}
-
-void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
+template<typename T>
+void Sort(T arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	int iterations = 0;
 	for (int i = 0; i < ROWS; i++)
@@ -159,7 +131,7 @@ void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
 				{
 					if (arr[k][l] < arr[i][j])
 					{
-						int buffer = arr[i][j];
+						T buffer = arr[i][j];
 						arr[i][j] = arr[k][l];
 						arr[k][l] = buffer;
 					}
